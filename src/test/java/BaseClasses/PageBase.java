@@ -1,4 +1,4 @@
-package Pages;
+package BaseClasses;
 
 public class PageBase {
 }
