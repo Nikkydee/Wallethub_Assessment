@@ -4,13 +4,8 @@ import BaseClasses.TestBase;
 import Pages.FBCreatePostPage;
 import Pages.FBDashboardPage;
 import Pages.FBLoginPage;
-import org.openqa.selenium.Dimension;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.util.concurrent.TimeUnit;
+import org.testng.annotations.Test;
 
 public class Facebook extends TestBase {
 

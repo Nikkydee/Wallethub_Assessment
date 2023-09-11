@@ -2,13 +2,17 @@ package BaseClasses;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -64,7 +68,7 @@ public class TestBase {
             edgeOptions.setCapability("disable-notifications",true);
             driver = new EdgeDriver(edgeOptions);
         }
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
     public void clearNotification() {
@@ -89,6 +93,10 @@ public class TestBase {
         }catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void waitForRefreshedVisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
     @AfterClass
