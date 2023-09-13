@@ -1,4 +1,4 @@
-package Pages;
+package Pages.FBPageObjects;
 
 import BaseClasses.PageBase;
 import org.openqa.selenium.WebDriver;

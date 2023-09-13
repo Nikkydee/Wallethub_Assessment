@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="WalletHub Assessment" verbose="2">
+
+    <test name="End to End Test" parallel="false">
+        <classes>
+            <class name="Tests.Facebook"/>
+            <class name="Tests.WalletHubReview"/>
+        </classes>
+    </test>
+
+</suite>

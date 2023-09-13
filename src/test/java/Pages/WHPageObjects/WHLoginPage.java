@@ -1,4 +1,4 @@
-package Pages;
+package Pages.WHPageObjects;
 
 import BaseClasses.PageBase;
 import org.openqa.selenium.WebDriver;
@@ -9,13 +9,18 @@ public class WHLoginPage extends PageBase {
     public WHLoginPage(WebDriver driver) {
         super(driver);
     }
-    @FindBy(xpath = "//input[@name='em']")
+    @FindBy(xpath = "//a[text()='Login']/..")
+    WebElement loginTab;
+    @FindBy(id = "em-ipt")
     WebElement emailField;
-    @FindBy(xpath = "//input[@type='password']")
+    @FindBy(id = "pw1-ipt")
     WebElement passwordField;
-    @FindBy(xpath = "//span[text()='Login']/..")
+    @FindBy(xpath = "//span[text()='Login']/../..")
     WebElement loginButton;
 
+    public void clickLoginTab() {
+        click(loginTab);
+    }
     public void enterEmail(String email) {
         enterText(emailField, email);
     }

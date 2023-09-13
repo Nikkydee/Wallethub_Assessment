@@ -1,9 +1,9 @@
-package Assignment1;
+package Tests;
 
 import BaseClasses.TestBase;
-import Pages.FBCreatePostPage;
-import Pages.FBDashboardPage;
-import Pages.FBLoginPage;
+import Pages.FBPageObjects.FBCreatePostPage;
+import Pages.FBPageObjects.FBDashboardPage;
+import Pages.FBPageObjects.FBLoginPage;
 
 import org.testng.annotations.Test;
 
@@ -18,7 +18,9 @@ public class Facebook extends TestBase {
 
         loginPage = new FBLoginPage(driver);
         driver.get(testData.getProperty("facebookURL"));
+        log.info("Entering facebook email");
         loginPage.enterEmail(testData.getProperty("facebookUsername"));
+        log.info("Entering facebook password");
         loginPage.enterPassword(testData.getProperty("facebookPassword"));
         loginPage.clickLoginButton();
         clearNotification();
@@ -33,6 +35,7 @@ public class Facebook extends TestBase {
     @Test(priority = 3, description = "Verify user can post a status message")
     public void userPostMessage(){
         createPostPage= new FBCreatePostPage(driver);
+        log.info("Posting status message");
         createPostPage.enterMessagePost(testData.getProperty("message"));
         createPostPage.clickPostButton();
     }

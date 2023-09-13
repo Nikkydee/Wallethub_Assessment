@@ -1,6 +1,9 @@
 package BaseClasses;
 
+import Tests.WalletHubReview;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +36,7 @@ public class TestBase {
     private static FirefoxOptions firefoxOptions;
     private static EdgeOptions edgeOptions;
     public static WebDriver driver;
+    public static Logger log;
     Robot robot;
 
     public TestBase() {
@@ -49,6 +53,7 @@ public class TestBase {
 
     @BeforeClass
     public void setup() {
+        log = LogManager.getLogger(WalletHubReview.class);
         if (browser.equalsIgnoreCase("chrome")){
             chromeOptions = new ChromeOptions();
             WebDriverManager.chromedriver().setup();
@@ -68,6 +73,7 @@ public class TestBase {
             edgeOptions.setCapability("disable-notifications",true);
             driver = new EdgeDriver(edgeOptions);
         }
+        log.info("Starting " + browser + " browser");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
@@ -95,13 +101,15 @@ public class TestBase {
         }
     }
     public void waitForRefreshedVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
     @AfterClass
     public void tearDown(){
         if (driver != null){
+            log.info("Browser is closing");
+//            driver.close();
             driver.quit();
         }
     }
